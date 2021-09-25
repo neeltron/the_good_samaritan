@@ -8,28 +8,38 @@ Future<Album> createAlbum(String title, heading, desc, reward) async {
   final response = await http.get(
     Uri.parse('https://the-good-samaritan-api.neeltron.repl.co/input?name='+title+'&heading='+heading+'&desc='+desc+'&reward='+reward),
   );
-
+  print(response.body);
   if (response.statusCode == 200) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
     return Album.fromJson(jsonDecode(response.body));
   } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
     throw Exception('Failed to create album.');
+  }
+}
+Future<Album> fetchAlbum() async {
+  final response = await http
+      .get(Uri.parse('https://the-good-samaritan-api.neeltron.repl.co/output'));
+
+  if (response.statusCode == 200) {
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load album');
   }
 }
 
 class Album {
-  final int id;
-  final String title;
+  final String name;
+  final String heading;
+  final String desc;
+  final String reward;
 
-  Album({required this.id, required this.title});
+  Album({required this.name, required this.heading, required this.desc, required this.reward});
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
-      id: json['id'],
-      title: json['title'],
+      name: json['name'],
+      heading: json['heading'],
+      desc: json['desc'],
+      reward: json['reward'],
     );
   }
 }
@@ -41,6 +51,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
+
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'The Good Samaritan',
@@ -112,6 +123,7 @@ class SecondRoute extends StatelessWidget {
 class VolunteerRoute extends StatelessWidget {
   const VolunteerRoute({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,8 +137,8 @@ class VolunteerRoute extends StatelessWidget {
             Image.asset('assets/vol.png'),
             const ListTile(
               leading: Icon(Icons.album),
-              title: Text('The Enchanted Nightingale'),
-              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+              title: Text('Help us Plant 1000 Trees'),
+              subtitle: Text('We will be gathering near the central park to plant 1000 trees.\nReward: Tee and Environment Swag'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -134,7 +146,24 @@ class VolunteerRoute extends StatelessWidget {
                 const SizedBox(width: 8),
                 TextButton(
                   child: const Text('Volunteer!'),
-                  onPressed: () {/* ... */},
+                  onPressed: () { fetchAlbum(); },
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+            Image.asset('assets/vol.png'),
+            const ListTile(
+              leading: Icon(Icons.album),
+              title: Text('Help me move to the nearby apartment'),
+              subtitle: Text('I need help to move heavy things in a nearby apartment.\nReward: \$25'),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                const SizedBox(width: 8),
+                TextButton(
+                  child: const Text('Volunteer!'),
+                  onPressed: () { fetchAlbum(); },
                 ),
                 const SizedBox(width: 8),
               ],
@@ -272,7 +301,7 @@ class MyCustomFormState extends State<MyCustomForm> {
       future: _futureAlbum,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Text(snapshot.data!.title);
+          return Text(snapshot.data!.name);
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }
@@ -282,6 +311,8 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
+
+
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
