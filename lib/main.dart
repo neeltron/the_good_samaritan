@@ -49,7 +49,7 @@ class SecondRoute extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => VolunteerRoute()),
+                    MaterialPageRoute(builder: (context) => const VolunteerRoute()),
                   );
                 },
               ),
@@ -159,6 +159,10 @@ class MyCustomFormState extends State<MyCustomForm> {
 
         children: [
           TextFormField(
+              decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Entity Name',
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -166,6 +170,44 @@ class MyCustomFormState extends State<MyCustomForm> {
               return null;
             },
           ),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Heading',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            maxLines: 8,
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Work Description',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Reward',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
