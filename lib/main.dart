@@ -37,11 +37,28 @@ class SecondRoute extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: const Text('Go back!'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.all(25),
+              child: FlatButton(
+                child: const Text('I\'m a Volunteer', style: TextStyle(fontSize: 20.0),),
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(25),
+              child: FlatButton(
+                child: const Text('I\'m Looking for Volunteers', style: TextStyle(fontSize: 20.0),),
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+          ],
         ),
       ),
     );
