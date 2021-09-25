@@ -146,7 +146,11 @@ class VolunteerRoute extends StatelessWidget {
                 const SizedBox(width: 8),
                 TextButton(
                   child: const Text('Volunteer!'),
-                  onPressed: () { fetchAlbum(); },
+                  onPressed: () { fetchAlbum();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('You\'ve signed up to volunteer!')),
+                  );
+                  },
                 ),
                 const SizedBox(width: 8),
               ],
@@ -163,7 +167,11 @@ class VolunteerRoute extends StatelessWidget {
                 const SizedBox(width: 8),
                 TextButton(
                   child: const Text('Volunteer!'),
-                  onPressed: () { fetchAlbum(); },
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('You\'ve signed up to volunteer!')),
+                    );
+                  },
                 ),
                 const SizedBox(width: 8),
               ],
