@@ -1,5 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+
+Future<Album> createAlbum(String title, heading, desc, reward) async {
+  final response = await http.get(
+    Uri.parse('https://the-good-samaritan-api.neeltron.repl.co/input?name='+title+'&heading='+heading+'&desc='+desc+'&reward='+reward),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to create album.');
+  }
+}
+
+class Album {
+  final int id;
+  final String title;
+
+  Album({required this.id, required this.title});
+
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      id: json['id'],
+      title: json['title'],
+    );
+  }
+}
 
 void main() {
   runApp(const MyApp());
@@ -149,6 +182,11 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+  final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
+  Future<Album>? _futureAlbum;
 
   @override
   Widget build(BuildContext context) {
@@ -160,6 +198,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
         children: [
           TextFormField(
+              controller: _controller,
               decoration: const InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Entity Name',
@@ -172,6 +211,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
           ),
           TextFormField(
+            controller: _controller2,
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Heading',
@@ -185,6 +225,7 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           TextFormField(
             maxLines: 8,
+            controller: _controller3,
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Work Description',
@@ -197,6 +238,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             },
           ),
           TextFormField(
+            controller: _controller4,
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),
               labelText: 'Reward',
@@ -217,6 +259,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Processing Data')),
                   );
+                  setState(() {
+                    _futureAlbum = createAlbum(_controller.text, _controller2.text, _controller3.text, _controller4.text);
+                  });
                 }
               },
               child: const Text('Submit'),
@@ -224,6 +269,20 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
         ],
       ),
+    );
+  }
+  FutureBuilder<Album> buildFutureBuilder() {
+    return FutureBuilder<Album>(
+      future: _futureAlbum,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data!.title);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
     );
   }
 }
