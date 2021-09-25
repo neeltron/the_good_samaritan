@@ -33,7 +33,95 @@ class SecondRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Second Route"),
+        title: const Text("The Good Samaritan"),
+        automaticallyImplyLeading: false,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.all(25),
+              child: FlatButton(
+                child: const Text('I\'m a Volunteer', style: TextStyle(fontSize: 20.0),),
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => VolunteerRoute()),
+                  );
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(25),
+              child: FlatButton(
+                child: const Text('I\'m Looking for Volunteers', style: TextStyle(fontSize: 20.0),),
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FindRoute()),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VolunteerRoute extends StatelessWidget {
+  const VolunteerRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("The Good Samaritan"),
+        automaticallyImplyLeading: false,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.all(25),
+              child: FlatButton(
+                child: const Text('I\'m a Volunteer', style: TextStyle(fontSize: 20.0),),
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(25),
+              child: FlatButton(
+                child: const Text('I\'m Looking for Volunteers', style: TextStyle(fontSize: 20.0),),
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FindRoute extends StatelessWidget {
+  const FindRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Create an Entry"),
         automaticallyImplyLeading: false,
       ),
       body: Center(
