@@ -95,32 +95,37 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter a search term',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Username',
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: TextFormField(
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
-                  labelText: 'Enter your username',
+                  labelText: 'Password',
                 ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(25),
+              child: FlatButton(
+                child: const Text('LogIn', style: TextStyle(fontSize: 20.0),),
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {},
               ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
     );
   }
 }
