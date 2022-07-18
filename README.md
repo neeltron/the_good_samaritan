@@ -1,6 +1,6 @@
-# the_good_samaritan
+# The Good Samaritan
 
-A new Flutter project.
+A platform-independent application to connect organizations and entities with willing volunteers.
 
 ## Getting Started
 
@@ -30,5 +30,4 @@ Back-end: Python-Flask<br>
 Authentication and API security: Auth0
 
 ## Prizes
-<br>
 Most Impactful Hack at SBUHacks!
