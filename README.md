@@ -15,5 +15,20 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+## Inspiration
+
+For non-profit organizations and even some helpless individuals, it is difficult to find people who are willing to help with simple or daunting tasks. For someone who is willing to contribute to society, it can be difficult to find work to fill the time.
+
+## What it does
+
+The Good Samaritan is a platform-independent application where entities and volunteers can sign up and help each other. 
+
+## Tech Stack
+
+Front-end: Flutter, Dart<br>
+Back-end: Python-Flask<br>
+Authentication and API security: Auth0
+
+## Prizes
 <br>
 Most Impactful Hack at SBUHacks!
